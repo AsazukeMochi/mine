@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>MINE!MINE!(マイン!マイン!) | あさづけラボ</title>
+        <link rel="icon" href="favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
+        <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/ fb# website: http://ogp.me/ns/ website#">
+        <meta property="og:url" content="https://app.azm-it.com/games/mine" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="MINE!MINE!(マイン!マイン!) | あさづけラボ" />
+        <meta property="og:description" content="時間内に鉱石を集めてハイスコアを目指そう！手軽に遊べるカジュアルゲームです。" />
+        <meta property="og:site_name" content="MINE!MINE!(マイン!マイン!) | あさづけラボ" /> 
+        <meta property="og:image" content="https://app.azm-it.com/games/mine/ogp.png"/>
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@AsazukeMochi" />
+
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
+
+        <script src="https://cdn.jsdelivr.net/gh/phi-jp/phina.js@0.2.3/build/phina.js"></script>
+        <script src="js/UserAgent.js"></script>
+        <script src="js/social.js"></script>
+        <script src="js/Storage.js"></script>
+        <script src="js/ga.js"></script>
+        <script src="js/URLParam.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/LoadingScene.js"></script>
+        <script src="js/title.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/result.js"></script>
+        <script src="js/CommonLabel.js"></script>
+        <script src="js/PixelSprite.js"></script>
+        <script src="js/Animator.js"></script>
+        <script src="js/VirtualKey.js"></script>
+        <script src="js/TextSprite.js"></script>
+        <script src="js/EventManager.js"></script>
+        <script src="js/Timer.js"></script>
+
+        <script>
+
+            function ResizeCanvas() {
+                const canvasRate = 9 / 16;
+                const windowRate = window.innerWidth / window.innerHeight;
+
+                const canvas = document.getElementsByTagName("canvas")[0];
+
+                if (canvasRate < windowRate) {
+                    if (!canvas.classList.contains("h-max")) {
+                        canvas.classList.add("h-max");
+                        canvas.classList.remove("w-max");
+                    }
+                } else {
+                    if (!canvas.classList.contains("w-max")) {
+                        canvas.classList.add("w-max");
+                        canvas.classList.remove("h-max");
+                    }
+                }
+            }
+
+            //キーボード入力での画面スクロールを防止
+            window.addEventListener('keydown', function(e) {
+                switch(e.keyCode) {
+                    case 32: //space
+                    case 37: //←
+                    case 38: //↑
+                    case 39: //→
+                    case 40: //↓
+                        e.preventDefault();
+                    break;
+                }
+            })
+
+            window.addEventListener('resize', ResizeCanvas);
+            window.addEventListener('load', ResizeCanvas);
+
+        </script>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+        
+        <style>
+            
+            body {
+                margin: 0;
+                font-family: sans-serif;
+                background-color: #222;
+                color: white;
+            }
+            
+            .detail {
+                display: none;
+                text-align: center;
+            }
+
+            header {
+                width: 100%;
+                height : 50px;
+                background-color: steelblue;
+                text-align: center;
+                padding: 5px 0px;
+            }
+
+            header img {
+                height: 100%;
+            }
+            
+
+            
+            @media screen and (min-width: 480px) {
+                canvas {
+                    margin: 20px auto;
+                    display: block;
+                    width: 360px;
+                 }
+
+                .detail {
+                    display: block;
+                }
+            }
+            
+            /*ウィンドウ幅が最大479pxまでの場合に適用*/
+            @media screen and (max-width: 479px) { 
+
+                canvas {
+                    position: absolute;
+                    margin: auto;
+                    left: 0px;
+                    top: 60px;
+                    bottom: 0px;
+                    right: 0px;
+                }
+
+                .w-max {
+                    width: 100%;
+                }
+
+                .h-max {
+                    height: calc(100% - 60px);
+                }
+
+            }
+
+        </style>
+        
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZ579BM50D"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CZ579BM50D');
+    </script>
+
+
+    <body>
+
+        <!-- <a href="../portal/">
+            <header>
+                <img src="./title.png">
+            </header>
+        </a> -->
+
+        <canvas id="canvas"></canvas>
+        <div class="detail">
+            【キーボード操作】<br>
+            移動：←↑→↓ または WASD<br>
+            スキル：スペースキー
+        </div>
+    </body>
+</html>
